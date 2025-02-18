@@ -18,6 +18,7 @@ def login(id: str, password: str, driver):
     login_button.click()
 
 def remove_comments(driver):
+    remove_count = 0
     while True:
         WebDriverWait(driver, 10).until(
         expected_conditions.element_to_be_clickable((By.CLASS_NAME, 'article'))
@@ -36,6 +37,8 @@ def remove_comments(driver):
             delete_button.click()
             alert = driver.switch_to.alert
             alert.accept()
+            remove_count += 1
         driver.back()
         driver.refresh()
+    return remove_count
     print('삭제가 완료되었습니다.')
